@@ -1,0 +1,42 @@
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: ap-northeast-1
+
+functions:
+  getUsers:
+    handler: users.get
+    environment:
+      DYNAMODB_ENDPOINT: http://localhost:8000
+    events:
+      - httpApi:
+          path: /users
+          method: get
+  addUser:
+    handler: users.addUser
+    environment:
+      DYNAMODB_ENDPOINT: http://localhost:8000
+    events:
+      - httpApi:
+          path: /users
+          method: post
+
+plugins:
+  - serverless-dynamodb
+  - serverless-offline
+
+custom:
+  dynamodb:
+    start:
+      port: 8000
+      migrate: true
+      inMemory: true
+      # dbPath: .dynamodb/data
+      sharedDb: true
+    stages:
+      - dev
+
+resources: ${file(resources.yml)}
