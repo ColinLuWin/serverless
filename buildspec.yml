@@ -1,0 +1,17 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      # 安裝 Node.js
+      - echo "Installing Node.js..."
+      - apt-get update
+      - curl -sL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+      - sudo apt-get install -y nodejs
+      # 安裝 npm 套件
+      - npm install
+      # 安裝指定版本的 Serverless Framework
+      - npm install -g serverless@3.39.0
+  build:
+    commands:
+      # 部署
+      - sls deploy
