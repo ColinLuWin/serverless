@@ -1,0 +1,16 @@
+# local development environment settings
+DYNAMODB_ENDPOINT: http://localhost:8000
+
+PLUGINS_DYNAMODB: serverless-dynamodb
+PLUGINS_OFFLINE: serverless-offline
+
+DYNAMODB_CONFIG:
+  endpoint: 'http:localhost:8000'
+  start:
+    port: 8000
+    migrate: true
+    inMemory: true
+    sharedDb: true
+    # dbPath: .dynamodb/data
+  stages:
+    - local

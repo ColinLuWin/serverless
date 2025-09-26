@@ -1,0 +1,7 @@
+# aws environment(dev) settings
+DYNAMODB_ENDPOINT: ''
+
+PLUGINS_DYNAMODB: ''
+PLUGINS_OFFLINE: ''
+
+DYNAMODB_START: {}
