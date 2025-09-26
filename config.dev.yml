@@ -4,4 +4,8 @@ DYNAMODB_ENDPOINT: ''
 PLUGINS_DYNAMODB: ~
 PLUGINS_OFFLINE: ~
 
-DYNAMODB_CONFIG: {}
+DYNAMODB_CONFIG:
+  endpoint: ''
+  stages:
+    - dev
+  start:
