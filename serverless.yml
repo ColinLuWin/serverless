@@ -1,16 +1,16 @@
 service: aws-node-http-api-project
-frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs22.x
   region: ap-northeast-1
+  stage: ${opt:stage, 'dev'} # 讓 provider 的 stage 可以從指令中傳入
 
 functions:
   getUsers:
     handler: users.get
     environment:
-      DYNAMODB_ENDPOINT: http://localhost:8000
+      DYNAMODB_ENDPOINT: ${self:custom.config.DYNAMODB_ENDPOINT}
     events:
       - httpApi:
           path: /users
@@ -18,25 +18,18 @@ functions:
   addUser:
     handler: users.addUser
     environment:
-      DYNAMODB_ENDPOINT: http://localhost:8000
+      DYNAMODB_ENDPOINT: ${self:custom.config.DYNAMODB_ENDPOINT}
     events:
       - httpApi:
           path: /users
           method: post
 
 plugins:
-  - serverless-dynamodb
-  - serverless-offline
+  - ${self:custom.config.PLUGINS_DYNAMODB}
+  - ${self:custom.config.PLUGINS_OFFLINE}
 
 custom:
-  dynamodb:
-    start:
-      port: 8000
-      migrate: true
-      inMemory: true
-      # dbPath: .dynamodb/data
-      sharedDb: true
-    stages:
-      - dev
+  config: ${file(config.${opt:stage, 'dev'}.yml)}
+  dynamodb: ${self:custom.config.DYNAMODB_CONFIG}
 
 resources: ${file(resources.yml)}

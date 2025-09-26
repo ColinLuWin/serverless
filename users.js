@@ -10,7 +10,7 @@ const dynamoDb = process.env.DYNAMODB_ENDPOINT
 module.exports.get = async (event, context) => {
   // 使用你 serverless.yml 裡面設定的 DynamoDB 資料表名稱
   const params = {
-    TableName: 'users-dev',
+    TableName: 'users-local',
   };
 
   try {
@@ -50,7 +50,7 @@ module.exports.addUser = async (event, context) => {
       //第一筆 用戶個人檔案
       {
         Put: {
-          TableName: 'users-dev',
+          TableName: 'users-local',
           Item: {
             PK: `USER#${userId}`,
             SK: `PROFILE#${userId}`,
@@ -62,7 +62,7 @@ module.exports.addUser = async (event, context) => {
       //第二筆 用戶註冊活動
       {
         Put: {
-          TableName: 'users-dev',
+          TableName: 'users-local',
           Item: {
             PK: `USER#${userId}`,
             SK: `ACTIVITY${timestamp}`,
