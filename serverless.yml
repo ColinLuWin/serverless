@@ -24,9 +24,7 @@ functions:
           path: /users
           method: post
 
-plugins:
-  - ${self:custom.config.PLUGINS_DYNAMODB}
-  - ${self:custom.config.PLUGINS_OFFLINE}
+plugins: ${self:custom.config.plugins}
 
 custom:
   config: ${file(config.${opt:stage, 'dev'}.yml)}
