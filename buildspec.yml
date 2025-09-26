@@ -10,8 +10,8 @@ phases:
       # 安裝 npm 套件
       - npm install
       # 安裝指定版本的 Serverless Framework
-      - npm install -g serverless@3.39.0
+      - npm install -g serverless
   build:
     commands:
       # 部署
-      - sls deploy
+      - sls deploy --stage=dev
