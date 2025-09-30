@@ -2,7 +2,7 @@ Resources:
   MyTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: users-${sls:stage}
+      TableName: users
       AttributeDefinitions:
         - AttributeName: PK
           AttributeType: S

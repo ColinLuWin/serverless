@@ -8,7 +8,7 @@ provider:
 
 functions:
   getUsers:
-    handler: users.get
+    handler: users.getUsers
     environment:
       DYNAMODB_ENDPOINT: ${self:custom.config.DYNAMODB_ENDPOINT}
     events:
