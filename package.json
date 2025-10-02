@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "scripts": {
     "offline": "sls offline start --stage=local"
   },
